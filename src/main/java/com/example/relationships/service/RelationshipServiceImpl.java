@@ -39,6 +39,7 @@ public class RelationshipServiceImpl implements RelationshipService {
     }
 
     @Override
+    @Transactional
     public void deleteInstructorDetailById(int id) {
         var detail = findInstructorDetailById(id);
         detail.getInstructor().setInstructorDetail(null);

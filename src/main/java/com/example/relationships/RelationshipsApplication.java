@@ -22,6 +22,7 @@ public class RelationshipsApplication {
 //            System.out.println(relationshipService.findById(2));
 //            relationshipService.deleteById(1);
             findInstructorDetail(relationshipService, 3);
+            relationshipService.deleteInstructorDetailById(3);
         };
     }
 
