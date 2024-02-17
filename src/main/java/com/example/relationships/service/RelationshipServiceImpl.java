@@ -1,6 +1,7 @@
 package com.example.relationships.service;
 
 import com.example.relationships.entity.Instructor;
+import com.example.relationships.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,5 +31,17 @@ public class RelationshipServiceImpl implements RelationshipService {
         Instructor instructor = findById(id);
         if(instructor == null) return;
         entityManager.remove(instructor);
+    }
+
+    @Override
+    public InstructorDetail findInstructorDetailById(int id) {
+        return entityManager.find(InstructorDetail.class, id);
+    }
+
+    @Override
+    public void deleteInstructorDetailById(int id) {
+        var detail = findInstructorDetailById(id);
+        detail.getInstructor().setInstructorDetail(null);
+        entityManager.remove(detail);
     }
 }

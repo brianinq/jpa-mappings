@@ -19,8 +19,9 @@ public class RelationshipsApplication {
     public CommandLineRunner commandLineRunner(RelationshipService relationshipService){
         return runner ->{
 //            createInstructor(relationshipService);
-            System.out.println(relationshipService.findById(2));
-            relationshipService.deleteById(1);
+//            System.out.println(relationshipService.findById(2));
+//            relationshipService.deleteById(1);
+            findInstructorDetail(relationshipService, 3);
         };
     }
 
@@ -32,5 +33,11 @@ public class RelationshipsApplication {
         System.out.println(instructor);
         relationshipService.save(instructor);
         System.out.println("\nSaved!!");
+    }
+
+    private void findInstructorDetail(RelationshipService relationshipService, int id) {
+        var instructorDetail = relationshipService.findInstructorDetailById(id);
+        System.out.println(instructorDetail);
+        System.out.println("Instructor for detail----- \n" + instructorDetail.getInstructor());
     }
 }
