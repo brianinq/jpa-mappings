@@ -1,5 +1,8 @@
 package com.example.relationships;
 
+import com.example.relationships.entity.Instructor;
+import com.example.relationships.entity.InstructorDetail;
+import com.example.relationships.service.RelationshipServive;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,9 +16,19 @@ public class RelationshipsApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(){
+    public CommandLineRunner commandLineRunner(RelationshipServive relationshipServive){
         return runner ->{
-            System.out.println("WE running!!!");
+            createInstructor(relationshipServive);
         };
+    }
+
+    private void createInstructor(RelationshipServive relationshipServive) {
+        var instructor = new Instructor("Allen", "Davies", "davialen@g.mail");
+        var instructorDetail = new InstructorDetail("https://youtube.com/", "I love Coding");
+        instructor.setInstructorDetail(instructorDetail);
+
+        System.out.println(instructor);
+        relationshipServive.save(instructor);
+        System.out.println("\nSaved!!");
     }
 }
