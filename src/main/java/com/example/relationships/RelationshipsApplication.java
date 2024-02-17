@@ -2,7 +2,7 @@ package com.example.relationships;
 
 import com.example.relationships.entity.Instructor;
 import com.example.relationships.entity.InstructorDetail;
-import com.example.relationships.service.RelationshipServive;
+import com.example.relationships.service.RelationshipService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,19 +16,21 @@ public class RelationshipsApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(RelationshipServive relationshipServive){
+    public CommandLineRunner commandLineRunner(RelationshipService relationshipService){
         return runner ->{
-            createInstructor(relationshipServive);
+//            createInstructor(relationshipService);
+            System.out.println(relationshipService.findById(2));
+            relationshipService.deleteById(1);
         };
     }
 
-    private void createInstructor(RelationshipServive relationshipServive) {
+    private void createInstructor(RelationshipService relationshipService) {
         var instructor = new Instructor("Allen", "Davies", "davialen@g.mail");
         var instructorDetail = new InstructorDetail("https://youtube.com/", "I love Coding");
         instructor.setInstructorDetail(instructorDetail);
 
         System.out.println(instructor);
-        relationshipServive.save(instructor);
+        relationshipService.save(instructor);
         System.out.println("\nSaved!!");
     }
 }
