@@ -22,7 +22,7 @@ public class Course {
     public Course() {
     }
 
-    public Course(String title, Instructor instructor) {
+    public Course(String title) {
         this.title = title;
     }
 

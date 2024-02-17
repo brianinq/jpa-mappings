@@ -1,5 +1,6 @@
 package com.example.relationships;
 
+import com.example.relationships.entity.Course;
 import com.example.relationships.entity.Instructor;
 import com.example.relationships.entity.InstructorDetail;
 import com.example.relationships.service.RelationshipService;
@@ -21,9 +22,23 @@ public class RelationshipsApplication {
 //            createInstructor(relationshipService);
 //            System.out.println(relationshipService.findById(2));
 //            relationshipService.deleteById(1);
-            findInstructorDetail(relationshipService, 3);
-            relationshipService.deleteInstructorDetailById(3);
+//            findInstructorDetail(relationshipService, 3);
+//            relationshipService.deleteInstructorDetailById(3);
+            createInstructorWithCourses(relationshipService);
         };
+    }
+
+    private void createInstructorWithCourses(RelationshipService relationshipService) {
+        var instructor = new Instructor("Allen", "Davies", "davialen@g.mail");
+        var instructorDetail = new InstructorDetail("https://youtube.com/", "I love Coding");
+        instructor.setInstructorDetail(instructorDetail);
+        var course1 = new Course("Getting Started with GIT");
+        var course2 = new Course("Html for babies: Get yur 20yrs experience");
+        instructor.addCourse(course1);
+        instructor.addCourse(course2);
+        System.out.println("Saving Courses to db\n\n");
+        //this also saves courses due to persist cascade
+        relationshipService.save(instructor);
     }
 
     private void createInstructor(RelationshipService relationshipService) {
