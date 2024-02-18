@@ -57,4 +57,13 @@ public class RelationshipServiceImpl implements RelationshipService {
         return query.getResultList();
     }
 
+    @Override
+    public Instructor findInstructorByIdJoinFetch(int id) {
+        TypedQuery<Instructor> query = entityManager.createQuery(
+                "select i from Instructor i join fetch i.courses where i.id=:id", Instructor.class
+        );
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
 }

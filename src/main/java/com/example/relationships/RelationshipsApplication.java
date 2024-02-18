@@ -9,8 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
-
 @SpringBootApplication
 public class RelationshipsApplication {
 
@@ -32,15 +30,12 @@ public class RelationshipsApplication {
     }
 
     private void findInstructorWithCourses(RelationshipService relationshipService, int id) {
-        System.out.println("finding instructor id: " + id);
-        var instructor = relationshipService.findById(id);
+        System.out.println("finding instructor join fetch id: " + id);
+        var instructor = relationshipService.findInstructorByIdJoinFetch(id);
         if (instructor == null) {
             System.out.println("Not found: id= " + id);
             return;
         }
-        System.out.println("instructor ----\n" + instructor);
-        List<Course> courses = relationshipService.findCoursesByInstructorId(id);
-        instructor.setCourses(courses);
         System.out.println("courses ===>\n" + instructor.getCourses());
 
     }
