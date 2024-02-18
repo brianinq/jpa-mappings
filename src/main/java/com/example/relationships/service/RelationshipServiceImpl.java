@@ -3,6 +3,7 @@ package com.example.relationships.service;
 import com.example.relationships.entity.Course;
 import com.example.relationships.entity.Instructor;
 import com.example.relationships.entity.InstructorDetail;
+import com.example.relationships.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Service;
@@ -93,6 +94,13 @@ public class RelationshipServiceImpl implements RelationshipService {
     @Override
     public Course findCourseAndStudentsByCourseId(int id) {
         TypedQuery<Course> query = entityManager.createQuery("SELECT course FROM Course course JOIN FETCH course.students WHERE course.id=:id", Course.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int id) {
+        TypedQuery<Student> query = entityManager.createQuery("SELECT student FROM Student student JOIN FETCH student.courses WHERE student.id=:id", Student.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }

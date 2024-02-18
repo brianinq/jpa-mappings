@@ -3,6 +3,7 @@ package com.example.relationships.service;
 import com.example.relationships.entity.Course;
 import com.example.relationships.entity.Instructor;
 import com.example.relationships.entity.InstructorDetail;
+import com.example.relationships.entity.Student;
 
 import java.util.List;
 
@@ -26,5 +27,7 @@ public interface RelationshipService {
     Course findCourseAndReviewsByCourseId(int id);
 
     Course findCourseAndStudentsByCourseId(int id);
+
+    Student findStudentAndCoursesByStudentId(int id);
 
 }

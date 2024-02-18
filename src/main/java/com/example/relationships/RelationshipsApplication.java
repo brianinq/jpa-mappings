@@ -28,8 +28,9 @@ public class RelationshipsApplication {
 //            relationshipService.deleteById(2);
 //            createCourseAndReviews(relationshipService);
 //            System.out.println(relationshipService.findCourseAndReviewsByCourseId(11).getReviews());
-            createCourseAndStudents(relationshipService);
-            System.out.println(relationshipService.findCourseAndStudentsByCourseId(14).getStudents());
+//            createCourseAndStudents(relationshipService);
+//            System.out.println(relationshipService.findCourseAndStudentsByCourseId(14).getStudents());
+            System.out.println(relationshipService.findStudentAndCoursesByStudentId(3).getCourses());
         };
     }
 
