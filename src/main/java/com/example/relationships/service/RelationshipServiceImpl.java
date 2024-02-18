@@ -34,6 +34,11 @@ public class RelationshipServiceImpl implements RelationshipService {
     public void deleteById(int id) {
         Instructor instructor = findById(id);
         if(instructor == null) return;
+        
+        // disassociate instructor with courses before delete
+        List<Course> courses = instructor.getCourses();
+        courses.forEach(course -> course.setInstructor(null));
+
         entityManager.remove(instructor);
     }
 
@@ -60,10 +65,16 @@ public class RelationshipServiceImpl implements RelationshipService {
     @Override
     public Instructor findInstructorByIdJoinFetch(int id) {
         TypedQuery<Instructor> query = entityManager.createQuery(
-                "select i from Instructor i join fetch i.courses where i.id=:id", Instructor.class
+                "select i from Instructor i join fetch i.courses join fetch i.instructorDetail where i.id=:id", Instructor.class
         );
         query.setParameter("id", id);
         return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public Instructor updateInstructor(Instructor instructor) {
+        return entityManager.merge(instructor);
     }
 
 }

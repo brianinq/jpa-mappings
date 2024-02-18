@@ -18,4 +18,7 @@ public interface RelationshipService {
     List<Course> findCoursesByInstructorId(int id);
 
     Instructor findInstructorByIdJoinFetch(int id);
+
+    Instructor updateInstructor(Instructor instructor);
+
 }

@@ -25,8 +25,17 @@ public class RelationshipsApplication {
 //            findInstructorDetail(relationshipService, 3);
 //            relationshipService.deleteInstructorDetailById(3);
 //            createInstructorWithCourses(relationshipService);
-            findInstructorWithCourses(relationshipService, 1);
+//            findInstructorWithCourses(relationshipService, 1);
+//            updateInstructor(relationshipService);
+            relationshipService.deleteById(2);
         };
+    }
+
+    private void updateInstructor(RelationshipService relationshipService) {
+        var instructor = relationshipService.findById(1);
+        instructor.setLastName("Alkaline");
+        var in = relationshipService.updateInstructor(instructor);
+        System.out.println(in);
     }
 
     private void findInstructorWithCourses(RelationshipService relationshipService, int id) {
@@ -44,8 +53,8 @@ public class RelationshipsApplication {
         var instructor = new Instructor("Allen", "Davies", "davialen@g.mail");
         var instructorDetail = new InstructorDetail("https://youtube.com/", "I love Coding");
         instructor.setInstructorDetail(instructorDetail);
-        var course1 = new Course("Getting Started with GIT");
-        var course2 = new Course("Html for babies: Get yur 20yrs experience");
+        var course1 = new Course("Getting Started with GIT -09");
+        var course2 = new Course("Html for babies: Get your 20yrs experience");
         instructor.addCourse(course1);
         instructor.addCourse(course2);
         System.out.println("Saving Courses to db\n\n");
