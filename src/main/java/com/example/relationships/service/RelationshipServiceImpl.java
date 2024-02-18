@@ -1,10 +1,14 @@
 package com.example.relationships.service;
 
+import com.example.relationships.entity.Course;
 import com.example.relationships.entity.Instructor;
 import com.example.relationships.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class RelationshipServiceImpl implements RelationshipService {
@@ -45,4 +49,12 @@ public class RelationshipServiceImpl implements RelationshipService {
         detail.getInstructor().setInstructorDetail(null);
         entityManager.remove(detail);
     }
+
+    @Override
+    public List<Course> findCoursesByInstructorId(int id) {
+        TypedQuery<Course> query = entityManager.createQuery("from Course where instructor.id = :id", Course.class);
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
 }

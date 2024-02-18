@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class RelationshipsApplication {
 
@@ -24,8 +26,23 @@ public class RelationshipsApplication {
 //            relationshipService.deleteById(1);
 //            findInstructorDetail(relationshipService, 3);
 //            relationshipService.deleteInstructorDetailById(3);
-            createInstructorWithCourses(relationshipService);
+//            createInstructorWithCourses(relationshipService);
+            findInstructorWithCourses(relationshipService, 1);
         };
+    }
+
+    private void findInstructorWithCourses(RelationshipService relationshipService, int id) {
+        System.out.println("finding instructor id: " + id);
+        var instructor = relationshipService.findById(id);
+        if (instructor == null) {
+            System.out.println("Not found: id= " + id);
+            return;
+        }
+        System.out.println("instructor ----\n" + instructor);
+        List<Course> courses = relationshipService.findCoursesByInstructorId(id);
+        instructor.setCourses(courses);
+        System.out.println("courses ===>\n" + instructor.getCourses());
+
     }
 
     private void createInstructorWithCourses(RelationshipService relationshipService) {
