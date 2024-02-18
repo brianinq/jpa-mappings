@@ -29,7 +29,8 @@ public class RelationshipsApplication {
 //            findInstructorWithCourses(relationshipService, 1);
 //            updateInstructor(relationshipService);
 //            relationshipService.deleteById(2);
-            createCourseAndReviews(relationshipService);
+//            createCourseAndReviews(relationshipService);
+            System.out.println(relationshipService.findCourseAndReviewsByCourseId(11).getReviews());
         };
     }
 

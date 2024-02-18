@@ -83,4 +83,11 @@ public class RelationshipServiceImpl implements RelationshipService {
         entityManager.persist(course);
     }
 
+    @Override
+    public Course findCourseAndReviewsByCourseId(int id) {
+        TypedQuery<Course> query = entityManager.createQuery("SELECT course FROM Course course JOIN FETCH course.reviews WHERE course.id=:id", Course.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
 }

@@ -23,4 +23,6 @@ public interface RelationshipService {
 
     void createCourse(Course course);
 
+    Course findCourseAndReviewsByCourseId(int id);
+
 }
