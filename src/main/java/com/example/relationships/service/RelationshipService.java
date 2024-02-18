@@ -21,4 +21,6 @@ public interface RelationshipService {
 
     Instructor updateInstructor(Instructor instructor);
 
+    void createCourse(Course course);
+
 }

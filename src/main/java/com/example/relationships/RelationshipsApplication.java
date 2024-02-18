@@ -3,6 +3,7 @@ package com.example.relationships;
 import com.example.relationships.entity.Course;
 import com.example.relationships.entity.Instructor;
 import com.example.relationships.entity.InstructorDetail;
+import com.example.relationships.entity.Review;
 import com.example.relationships.service.RelationshipService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -27,8 +28,21 @@ public class RelationshipsApplication {
 //            createInstructorWithCourses(relationshipService);
 //            findInstructorWithCourses(relationshipService, 1);
 //            updateInstructor(relationshipService);
-            relationshipService.deleteById(2);
+//            relationshipService.deleteById(2);
+            createCourseAndReviews(relationshipService);
         };
+    }
+
+    private void createCourseAndReviews(RelationshipService relationshipService) {
+//        var instructor = relationshipService.findById(1);
+        var course = new Course("Introduction to Python3");
+        var review1 = new Review("Great course good for beginners");
+        var review2 = new Review("The instructor is very well detailed");
+        course.addReview(review1);
+        course.addReview(review2);
+//        course.setInstructor(instructor);
+        relationshipService.createCourse(course);
+        System.out.println("Done saving course!");
     }
 
     private void updateInstructor(RelationshipService relationshipService) {

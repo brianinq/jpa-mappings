@@ -34,7 +34,7 @@ public class RelationshipServiceImpl implements RelationshipService {
     public void deleteById(int id) {
         Instructor instructor = findById(id);
         if(instructor == null) return;
-        
+
         // disassociate instructor with courses before delete
         List<Course> courses = instructor.getCourses();
         courses.forEach(course -> course.setInstructor(null));
@@ -75,6 +75,12 @@ public class RelationshipServiceImpl implements RelationshipService {
     @Transactional
     public Instructor updateInstructor(Instructor instructor) {
         return entityManager.merge(instructor);
+    }
+
+    @Override
+    @Transactional
+    public void createCourse(Course course) {
+        entityManager.persist(course);
     }
 
 }
