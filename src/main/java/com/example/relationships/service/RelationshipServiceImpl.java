@@ -90,4 +90,11 @@ public class RelationshipServiceImpl implements RelationshipService {
         return query.getSingleResult();
     }
 
+    @Override
+    public Course findCourseAndStudentsByCourseId(int id) {
+        TypedQuery<Course> query = entityManager.createQuery("SELECT course FROM Course course JOIN FETCH course.students WHERE course.id=:id", Course.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
 }

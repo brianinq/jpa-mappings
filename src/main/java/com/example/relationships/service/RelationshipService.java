@@ -25,4 +25,6 @@ public interface RelationshipService {
 
     Course findCourseAndReviewsByCourseId(int id);
 
+    Course findCourseAndStudentsByCourseId(int id);
+
 }

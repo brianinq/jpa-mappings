@@ -1,9 +1,6 @@
 package com.example.relationships;
 
-import com.example.relationships.entity.Course;
-import com.example.relationships.entity.Instructor;
-import com.example.relationships.entity.InstructorDetail;
-import com.example.relationships.entity.Review;
+import com.example.relationships.entity.*;
 import com.example.relationships.service.RelationshipService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,8 +27,19 @@ public class RelationshipsApplication {
 //            updateInstructor(relationshipService);
 //            relationshipService.deleteById(2);
 //            createCourseAndReviews(relationshipService);
-            System.out.println(relationshipService.findCourseAndReviewsByCourseId(11).getReviews());
+//            System.out.println(relationshipService.findCourseAndReviewsByCourseId(11).getReviews());
+            createCourseAndStudents(relationshipService);
+            System.out.println(relationshipService.findCourseAndStudentsByCourseId(14).getStudents());
         };
+    }
+
+    private void createCourseAndStudents(RelationshipService relationshipService) {
+        Course course = new Course("The ultimate guide to Dapps.");
+        Student student1 = new Student("Alvin", "Franklin", "af@af.fa");
+        Student student2 = new Student("Benson", "Gareth", "bg@bg.gb");
+        course.addStudent(student1);
+        course.addStudent(student2);
+        relationshipService.createCourse(course);
     }
 
     private void createCourseAndReviews(RelationshipService relationshipService) {
